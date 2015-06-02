@@ -29,7 +29,7 @@
 				}
 				$.ajax({
 					type: "post",
-					url: "http://121.40.219.90/ctea/register_if.do",					
+					url: "http://121.40.219.90/ctea/register_if.do",
 					async: false,
 					data: {
 						username: mobile,
@@ -37,10 +37,10 @@
 					},
 					dataType: "json",
 					success: function(data, status) {
-						$("#msg").html(data+""+status);
+						$("#msg").html(data + "" + status);
 					},
-					error: function(res) {
-						$("#msg").html("error:"+res.status);
+					error: function(http) {
+						$("#msg").html("error:" + http.status + ":" + $.httpData(http));
 					}
 				});
 			});
