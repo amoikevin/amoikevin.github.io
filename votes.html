@@ -26,28 +26,22 @@
 					$("#msg").html("手机格式错误");
 					return;
 				}
-				//				$.ajax({
-				//					crossDomain: true,
-				//					type: "get",
-				//					url: "http://121.40.219.90/ctea/register_if.do?jsoncallback=?",
-				//					async: true,
-				//					data: {
-				//						username: mobile,
-				//						password: "abc123"
-				//					},
-				//					dataType: "json",
-				//					success: function(data, status) {
-				//						$("#msg").html(data);
-				//					},
-				//					error: function(res) {
-				//						$("#msg").html(res.status);
-				//					}
-				//				});
-				$.getJSON("http://121.40.219.90/ctea/register_if.do", {
-					username: mobile,
-					password: "abc123"
-				}, function(json) {
-					$("#msg").html(json);
+				$.ajax({
+					crossDomain: true,
+					type: "get",
+					url: "http://121.40.219.90/ctea/register_if.do?jsoncallback=?",
+					async: true,
+					data: {
+						username: mobile,
+						password: "abc123"
+					},
+					dataType: "json",
+					success: function(data, status) {
+						$("#msg").html(data);
+					},
+					error: function(res) {
+						$("#msg").html(res.status);
+					}
 				});
 			});
 		</script>
