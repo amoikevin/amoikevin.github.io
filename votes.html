@@ -28,16 +28,17 @@
 				}
 				$.ajax({
 					crossDomain: true,
-					type: "get",
-					url: "http://121.40.219.90/ctea/register_if.do?jsoncallback=?",
+					type: "post",
+					url: "http://121.40.219.90/ctea/register_if.do",
+					jsonp:"callback",
 					async: true,
 					data: {
 						username: mobile,
 						password: "abc123"
 					},
-					dataType: "json",
+					dataType: "jsonp",
 					success: function(data, status) {
-						$("#msg").html(data);
+						$("#msg").html(data+""+status);
 					},
 					error: function(res) {
 						$("#msg").html(res.status);
