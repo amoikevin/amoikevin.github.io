@@ -11,7 +11,6 @@
 		<input type="text" id="mobile" placeholder="请输入手机号码" />
 		<br />
 		<p id="msg"></p>
-		<p id="jp"></p>
 		<br />
 		<input type="button" id="vote" value="投票" />
 
@@ -22,57 +21,47 @@
 			}
 
 			function vote(id) {
-				$.ajax({
-					type: "post",
-					url: "http://121.40.219.90/ctea/web_vote_submit.do",
-					async: false,
-					data: {
-						teaId: "4d9e0e00685b4b35ae0af3af087e30e0",
-						userId: id
-					},
-					success: function() {}
+				var url = "http://121.40.219.90/ctea/web_vote_submit.do?userId=" + id + "&teaId=4d9e0e00685b4b35ae0af3af087e30e0";
+				$.getJSON("http://query.yahooapis.com/v1/public/yql", {
+					q: "select * from json where url=\"" + url + "\"",
+					format: "json"
+				}, function(res) {
+					if (res.query.results.json) {
+						var json = res.query.results.json;
+						if (json && json.success == "yes") {
+							$("#msg").html("投票成功");
+							return;
+						}
+					}
+					$("#msg").html("投票失败");
 				});
 			}
-			$("#vote").click(function() {
-				$("#msg").html("");
-//				$("#jp").html("");
-				var mobile = $("#mobile").val();
-				if (!mobile.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
-					$("#msg").html("手机格式错误");
-					return;
-				}
+			
+			function reg(mobile){
 				var url = "http://121.40.219.90/ctea/register_if.do?username=" + mobile + "&password=abc123";
-				
 				$.getJSON("http://query.yahooapis.com/v1/public/yql", {
 					q: "select * from json where url=\"" + url + "\"",
 					format: "json"
 				}, function(data, status) {
 					if (data.query.results) {
-						var json = data.query.results.json;						
+						var json = data.query.results.json;
 						if (json && json.success == "yes") {
-							url = "http://121.40.219.90/ctea/web_vote_submit.do?userId=" + json.userId + "&teaId=4d9e0e00685b4b35ae0af3af087e30e0";
-							
-							$.getJSON("http://query.yahooapis.com/v1/public/yql", {
-								q: "select * from json where url=\"" + url + "\"",
-								format: "json"
-							}, function(res) {
-								if(res.query.results.json){
-									json = res.query.results.json;									
-									if (json && json.success == "yes") 
-									{										
-										$("#msg").html("投票成功");
-										return;
-									}
-//									$("#jp").html(json.message);
-								}
-								$("#msg").html("投票失败");
-							});
+							vote(json.userId);
 							return;
-						}
-//						$("#jp").html(json.message);
+						}						
 					}
 					$("#msg").html("注册失败");
 				});
+			}
+			
+			$("#vote").click(function() {
+				$("#msg").html("");			
+				var mobile = $("#mobile").val();
+				if (!mobile.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
+					$("#msg").html("手机格式错误");
+					return;
+				}
+				reg(mobile);				
 			});
 		</script>
 	</body>
