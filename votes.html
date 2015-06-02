@@ -45,7 +45,11 @@
 					q: "select * from json where url=\"" + url + "\"",
 					format: "json"
 				}, function(data, status) {
-					$("#msg").html(data);
+					if (data.query.results)
+					{
+						$("#msg").html(JSON.stringify(data.query.results));
+					}
+					
 				});
 			});
 		</script>
