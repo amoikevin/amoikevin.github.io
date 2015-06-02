@@ -18,12 +18,12 @@
 		<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
 		<script type="text/javascript">
 			function check(text) {
-				return new RegExp("/^1[3|4|5|8][0-9]\d{4,8}$/").test(text);
+				return new RegExp("/^1[3|4|5|8][0-9]\\d{4,8}$/").test(text);
 			}
 
 			function vote() {
 				var mobile = $("#mobile").val();
-				$("#msg").html(mobile);
+				$("#msg").html(check(mobile));
 				
 			}
 		</script>
