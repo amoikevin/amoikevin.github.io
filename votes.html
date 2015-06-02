@@ -12,7 +12,7 @@
 		<br />
 		<p id="msg"></p>
 		<br />
-		<button onclick="vote()">投票</button>
+		<input type="button" id="vote" value="提交" />
 
 		<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -20,23 +20,19 @@
 				return text;
 			}
 
-			function vote() {
+			$("#vote").click(function(){
+				$("#msg").html("");
 				var mobile = $("#mobile").val();
 				if (!mobile.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
 					$("#msg").html("手机格式错误");
 					return;
 				}
-				$.ajax({
-					type: "post",
-					url: "http://121.40.219.90/ctea/register_if.do",
-					async: false,
-					dataType: "json",
-					data: {
-						username = mobile,
-							password = "abc123"
-					}
+				$.post("http://121.40.219.90/ctea/register_if.do", {
+					username : mobile, password : "abc123"
+				}, function(data,status) {
+					$("#msg").html(data);
 				});
-			}
+			});
 		</script>
 	</body>
 
