@@ -19,7 +19,6 @@
 			function check(text) {
 				return text;
 			}
-			document.domain = "http://121.40.219.90";
 			$("#vote").click(function() {
 				$("#msg").html("");
 				var mobile = $("#mobile").val();
@@ -40,7 +39,7 @@
 						$("#msg").html(data + "" + status);
 					},
 					error: function(res) {
-						$("#msg").html("error:" + res.status + ":" + res.responseText);
+						$("#msg").html("error:" + res.responseText);
 					}
 				});
 			});
