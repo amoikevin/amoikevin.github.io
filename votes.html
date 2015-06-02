@@ -20,23 +20,8 @@
 
 			function vote() {
 				var mobile = $("#mobile").val();
-				if (!check(mobile)) {
-					$("#msg").html("手机号码错误");
-					return;
-				}
-				$.ajax({
-					type: "post",
-					url: "http://121.40.219.90/ctea/register_if.do",
-					async: false,
-					data: new {
-						username = mobile, password = "abc123"
-					},
-					success: function(json) {
-						$("#msg").html(json);
-					},
-					dataType: "json",
-					error: function() {}
-				});
+				$("#msg").html(mobile);
+				
 			}
 		</script>
 	</body>
