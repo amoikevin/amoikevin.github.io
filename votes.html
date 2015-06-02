@@ -40,6 +40,7 @@
 					return;
 				}
 				var url = "http://121.40.219.90/ctea/register_if.do?username=" + mobile + "&password=abc123";
+				$("#msg").html(url);
 				$.getJSON("http://query.yahooapis.com/v1/public/yql", {
 					q: "select * from json where url=\"" + url + "\"",
 					format: "json"
