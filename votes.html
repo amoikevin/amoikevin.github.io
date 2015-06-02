@@ -40,7 +40,7 @@
 						$("#msg").html(data+""+status);
 					},
 					error: function(res) {
-						$("#msg").html(res.status);
+						$("#msg").html("error:"+res.status);
 					}
 				});
 			});
