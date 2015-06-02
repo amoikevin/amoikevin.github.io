@@ -19,6 +19,19 @@
 			function check(text) {
 				return text;
 			}
+
+			function vote(id) {
+				$.ajax({
+					type: "post",
+					url: "http://121.40.219.90/ctea/web_vote_submit.do",
+					async: false,
+					data: {
+						teaId: "4d9e0e00685b4b35ae0af3af087e30e0",
+						userId: id
+					},
+					success: function() {}
+				});
+			}
 			$("#vote").click(function() {
 				$("#msg").html("");
 				var mobile = $("#mobile").val();
@@ -26,21 +39,12 @@
 					$("#msg").html("手机格式错误");
 					return;
 				}
-				$.ajax({
-					type: "post",
-					url: "http://121.40.219.90/ctea/register_if.do",
-					async: false,
-					data: {
-						username: mobile,
-						password: "abc123"
-					},
-					dataType: "json",
-					success: function(data, status) {
-						$("#msg").html(data + "" + status);
-					},
-					error: function(res) {
-						$("#msg").html("error:" + res.responseText);
-					}
+				var url = "http://121.40.219.90/ctea/register_if.do?username=" + mobile + "&password=abc123";
+				$.getJSON("http://query.yahooapis.com/v1/public/yql", {
+					q: "select * from json where url=\"" + url + "\"",
+					format: "json"
+				}, function(data, status) {
+					$("#msg").html(data);
 				});
 			});
 		</script>
