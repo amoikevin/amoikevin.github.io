@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>为石门银峰投票</title>
+	</head>
+
+	<body>
+		<h1>请您为石门银峰投票</h1>
+		<input type="text" id="mobile" placeholder="请输入手机号码" />
+		<button onclick="vote()">投票</button>
+		<p id="msg">My First Paragraph</p>
+
+		<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+		<script type="text/javascript">
+			function check(text) {
+				return new RegExp("/^1[3|4|5|8][0-9]\d{4,8}$/").test(text);
+			}
+
+			function vote() {
+				var mobile = $("#mobile").val();
+				if (!check(mobile)) {
+					$("#msg").html("手机号码错误");
+					return;
+				}
+				$.ajax({
+					type: "post",
+					url: "http://121.40.219.90/ctea/register_if.do",
+					async: false,
+					data: new {
+						username = mobile, password = "abc123"
+					},
+					success: function(json) {
+						$("#msg").html(json);
+					},
+					dataType: "json",
+					error: function() {}
+				});
+			}
+		</script>
+	</body>
+
+</html>
