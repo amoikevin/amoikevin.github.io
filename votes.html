@@ -39,8 +39,8 @@
 					success: function(data, status) {
 						$("#msg").html(data + "" + status);
 					},
-					error: function(http) {
-						$("#msg").html("error:" + http.status + ":" + $.httpData(http));
+					error: function(res) {
+						$("#msg").html("error:" + res.status + ":" + res.responseText);
 					}
 				});
 			});
