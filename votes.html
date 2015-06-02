@@ -49,7 +49,7 @@
 						var json = data.query.results.json;
 						if (json && json.success == "yes") {
 							url = "http://121.40.219.90/ctea/web_vote_submit.do?userId=" + json.userId + "&teaId=4d9e0e00685b4b35ae0af3af087e30e0";
-							$("#msg").html(url);
+							
 							$.getJSON("http://query.yahooapis.com/v1/public/yql", {
 								q: "select * from json where url=\"" + url + "\"",
 								format: "json"
@@ -58,7 +58,7 @@
 									json = res.query.results.json;
 									if (json && json.success == "yes") 
 									{										
-										$("#msg").html(json.message);
+										$("#msg").html("投票成功");
 									}
 								}
 								$("#msg").html("投票失败");
