@@ -15,6 +15,7 @@
 		<input type="button" id="vote" value="提交" />
 
 		<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+		<script src="https://raw.githubusercontent.com/cowboy/jquery-postmessage/master/jquery.ba-postmessage.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			function check(text) {
 				return text;
@@ -27,16 +28,14 @@
 					return;
 				}
 				$.ajax({
-					crossDomain: true,
 					type: "post",
-					url: "http://121.40.219.90/ctea/register_if.do",
-					jsonp:"callback",
-					async: true,
+					url: "http://121.40.219.90/ctea/register_if.do",					
+					async: false,
 					data: {
 						username: mobile,
 						password: "abc123"
 					},
-					dataType: "jsonp",
+					dataType: "json",
 					success: function(data, status) {
 						$("#msg").html(data+""+status);
 					},
