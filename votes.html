@@ -15,11 +15,11 @@
 		<input type="button" id="vote" value="提交" />
 
 		<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
-		<script src="https://raw.githubusercontent.com/cowboy/jquery-postmessage/master/jquery.ba-postmessage.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			function check(text) {
 				return text;
 			}
+			document.domain = "http://121.40.219.90";
 			$("#vote").click(function() {
 				$("#msg").html("");
 				var mobile = $("#mobile").val();
