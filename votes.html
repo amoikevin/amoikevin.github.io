@@ -32,11 +32,12 @@
 					dataType: "json",
 					data: {
 						username = mobile,
-						password = "abc123"
-					},
-					success: function(data, status) {
-						alert("Data: " + data + "\nStatus: " + status);
+							password = "abc123"
 					}
+				}).done(function(data, status) {
+					$("#msg").html("Data: " + data + "\nStatus: " + status);
+				}).fail(function(jqXHR, textStatus, errorThrown) {
+					$("#msg").html(jqXHR.status);
 				});
 			}
 		</script>
